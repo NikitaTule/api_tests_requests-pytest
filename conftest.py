@@ -6,7 +6,6 @@ import pytest
 from services.qiwi.qiwi_service import QiwiService
 from utils.config_reader import app_config
 
-
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 
@@ -17,8 +16,8 @@ def user_data():
 
 
 @pytest.fixture(scope="class")
-def qiwi_service(user_data) -> QiwiService:
-    """Сервис QIWI с авторизацией через Bearer токен."""
+def qiwi(user_data) -> QiwiService:
+    """Фикстура сервиса QIWI."""
     return QiwiService(
         user_data=user_data,
         headers={"Authorization": f"Bearer {os.getenv('QIWI_TOKEN')}"},

@@ -1,3 +1,5 @@
+import os
+import re
 from pathlib import Path
 from typing import Any, Dict
 
@@ -6,6 +8,11 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
+
+
+def _resolve_env(value: str) -> str:
+    """Резолвит ${VAR} из переменных окружения."""
+    return re.sub(r'\$\{(\w+)}', lambda m: os.getenv(m.group(1), m.group(0)), value)
 
 
 class ConfigNamespace:
@@ -22,6 +29,8 @@ class ConfigNamespace:
                     key,
                     [ConfigNamespace(item) if isinstance(item, dict) else item for item in value],
                 )
+            elif isinstance(value, str):
+                setattr(self, key, _resolve_env(value))
             else:
                 setattr(self, key, value)
 

@@ -6,3 +6,4 @@ pydantic-settings
 python-dotenv
 urllib3
 PyYAML
+pytest-check

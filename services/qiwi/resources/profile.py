@@ -5,7 +5,7 @@ from utils.clients.http_client import HttpClient
 from utils.config_reader import ConfigNamespace
 
 
-class ProfileResource:
+class Profile:
     """Обёртки над эндпоинтами профиля пользователя."""
 
     def __init__(self, client: HttpClient, user_data: Optional[ConfigNamespace] = None) -> None:

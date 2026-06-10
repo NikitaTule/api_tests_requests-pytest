@@ -1,6 +1,8 @@
 from typing import Optional
 
-from services.qiwi.resources.profile import ProfileResource
+from services.qiwi.models.balance import Balance
+from services.qiwi.resources.payments import Payments
+from services.qiwi.resources.profile import Profile
 from utils.clients.http_client import HttpClient
 from utils.config_reader import ConfigNamespace, app_config
 
@@ -18,4 +20,6 @@ class QiwiService:
             headers=headers or {},
         )
         self.user_data = user_data
-        self.profile = ProfileResource(client=self.client, user_data=user_data)
+        self.profile = Profile(client=self.client, user_data=user_data)
+        self.balance = Balance(client=self.client, user_data=user_data)
+        self.payments = Payments(client=self.client, user_data=user_data)
